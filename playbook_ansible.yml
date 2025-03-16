@@ -6,7 +6,7 @@
   tasks:
     - name: Configurar hostname
       hostname:
-        name: server.Jose.Ryann
+        name: server.Ryann.Antony.Gabriel
 
     - name: Atualizar pacotes
       apt:
