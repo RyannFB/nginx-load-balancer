@@ -1,5 +1,5 @@
 ---
-- name: Projeto dois de administração de sistemas
+- name: Projeto de Infraestrutura como Código(IaC) com Ansible e Docker Compose 
   hosts: all
   become: yes
 

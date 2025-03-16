@@ -1,6 +1,6 @@
 services:
   webproxy:
-    image: ryannfb/nginx1.0 # Sua imagem personalizada
+    image: ryannfb/nginx1.0 # Imagem Personalizada do Nginx
     ports:
       - "8080:8080"  # Expor a porta 8080
     networks:
@@ -10,7 +10,7 @@ services:
     container_name: webproxy
 
   webserver:
-    image: wordpress:latest  # Imagem oficial do Wordpress
+    image: wordpress:latest  
     volumes:
       - app:/var/www/html  # Volume persistente para o Wordpress
     environment:
