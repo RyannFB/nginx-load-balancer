@@ -1,8 +1,8 @@
 services:
   webproxy:
-    image: ryzo2157/nginx-load-balancer
+    image: ryannfb/nginx1.0 # Sua imagem personalizada
     ports:
-      - "8080:8080"
+      - "8080:8080"  # Expor a porta 8080
     networks:
       - wordpress
     depends_on:
@@ -10,9 +10,9 @@ services:
     container_name: webproxy
 
   webserver:
-    image: wordpress:latest
+    image: wordpress:latest  # Imagem oficial do Wordpress
     volumes:
-      - app:/var/www/html
+      - app:/var/www/html  # Volume persistente para o Wordpress
     environment:
       WORDPRESS_DB_HOST: database
       WORDPRESS_DB_USER: wordpress
@@ -25,9 +25,9 @@ services:
     container_name: webserver
 
   database:
-    image: mysql:5.7
+    image: mysql:5.7  # Imagem oficial do MySQL
     volumes:
-      - my:/var/lib/mysql
+      - my:/var/lib/mysql  # Volume persistente para o banco de dados
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: wordpress
@@ -39,8 +39,10 @@ services:
 
 volumes:
   app:
-    
+    name: app
   my:
-    
+    name: my
+
 networks:
   wordpress:
+    name: wordpress

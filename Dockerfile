@@ -1,15 +1,18 @@
-# Imagem oficial Ngnix como base
+# Usar a imagem oficial do Nginx
 FROM nginx:latest
 
-# Instala pacotes necessários
-RUN apt update && \
-    apt install -y iputils-ping curl
+# Copiar o arquivo nginx.conf para o diretório correto dentro do container
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Remove o arquivo de configuração padrão do nginx    
-RUN rm -f /etc/nginx/conf.d/default.conf
+# Remover o arquivo de configuração padrão do Nginx
+RUN rm /etc/nginx/conf.d/default.conf
 
-# Copia a configuração personalizada
-COPY nginx.conf /etc/nginx/conf.d/nginx.conf
 
-# Expor na porta 8080
+# Instalar pacotes necessários
+RUN apt update && apt install -y iputils-ping curl
+
+# Expor a porta 8080
 EXPOSE 8080
+
+# Iniciar o Nginx
+CMD ["nginx", "-g", "daemon off;"]

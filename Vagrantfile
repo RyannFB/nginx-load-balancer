@@ -14,10 +14,7 @@ Vagrant.configure("2") do |config|
       vb.memory = 1024
     end
   end
-
-  # Sincronizar o diretório do seu projeto com a VM
-  config.vm.synced_folder "/home/ryann//nginx-load-balancer", "/home/vagrant/nginx-load-balancer"
-
+  
   # Provisionamento com Ansible
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "playbook_ansible.yml"
