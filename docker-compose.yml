@@ -1,0 +1,46 @@
+services:
+  webproxy:
+    image: ryzo2157/nginx-load-balancer
+    ports:
+      - "8080:8080"
+    networks:
+      - wordpress
+    depends_on:
+      - webserver
+    container_name: webproxy
+
+  webserver:
+    image: wordpress:latest
+    volumes:
+      - app:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: database
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    networks:
+      - wordpress
+    depends_on:
+      - database
+    container_name: webserver
+
+  database:
+    image: mysql:5.7
+    volumes:
+      - my:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    networks:
+      - wordpress
+    container_name: database
+
+volumes:
+  app:
+    
+  my:
+    
+networks:
+  wordpress:
