@@ -8,7 +8,8 @@ services:
     depends_on:
       - webserver
     container_name: webproxy
-
+    restart: unless-restarted # Garante que containers reiniciem após falha no sistema
+    
   webserver:
     image: wordpress:latest  
     volumes:
